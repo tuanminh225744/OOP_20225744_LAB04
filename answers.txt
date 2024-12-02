@@ -1,0 +1,22 @@
+Which classes are aggregates of other classes? 
+- Store và Cart là các lớp aggregate của Media
+
+
+When overriding the equals() method of the Object class, you will have to cast the Object parameter obj to the type of Object that you are dealing with. For example, in the Media class, you must cast the Object obj to a Media, and then check the equality of the two objects’ attributes as the above requirements (i.e. title for Media; title and length for Track). If the passing object is not an instance of Media, what happens?
+- Khi ghi đè phương thức equals() trong lớp Media và đối tượng được truyền vào (obj) không phải là một thể hiện của lớp Media, phương thức cần phải xử lý tình huống này một cách an toàn để tránh việc gây ra lỗi ClassCastException. Nếu trực tiếp ép kiểu đối tượng obj sang Media (ví dụ: (Media) obj), và đối tượng obj không phải là thể hiện của lớp Media, một lỗi ClassCastException sẽ xảy ra khi chạy chương trình.
+
+
+What class should implement the Comparable interface?
+- Lớp Media nên implement interface Comparable để định nghĩa thứ tự sắp xếp mặc định cho các đối tượng của lớp này và các lớp con như CD, DVD.
+
+
+In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+- Cài đặt compareTo() trong Media để so sánh theo tiêu chí như tên trước, sau đó là giá. Ví dụ: so sánh tên rồi nếu giống thì so sánh giá trị.
+
+
+Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+- Không, Comparable chỉ hỗ trợ một quy tắc sắp xếp mặc định. Nếu cần quy tắc khác, cần sử dụng thêm Comparator.
+
+
+Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+- Trong lớp DVD, có thể ghi đè phương thức compareTo() để sắp xếp theo tên, độ dài giảm dần, rồi đến giá.
